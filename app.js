@@ -130,8 +130,8 @@ app.put('/update', function (req, res) {
 app.put('/insert', function (req, res) {
     let bb = req.body;
 
-    var sql = 'set @name =?; \ call detail(@name);';  
-    
+    var sql = 'set @name =?; \ call detail(@name);';
+
     con.query(sql, [bb.name, bb.email, bb.phone], function (err, dd) {
         if (!err) {
             res.send('Updated successfully');
@@ -153,66 +153,11 @@ app.delete('/delete', function (req, res) {
         else
             console.log(err);
     })
-})
+});
+
+
 
 app.listen(4009, function (err) {
     console.log("server running at localhost:4009....!", err);
 });
-/* 
 
-
-async function update(id, programmingLanguage){
-  const result = await db.query(
-    `UPDATE programming_languages 
-    SET name="${programmingLanguage.name}", released_year=${programmingLanguage.released_year}, githut_rank=${programmingLanguage.githut_rank}, 
-    pypl_rank=${programmingLanguage.pypl_rank}, tiobe_rank=${programmingLanguage.tiobe_rank} 
-    WHERE id=${id}` 
-  );
-
-  let message = 'Error in updating programming language';
-
-  if (result.affectedRows) {
-    message = 'Programming language updated successfully';
-  }
-
-  return {message};
-}
-
-router.put('/:id', async function(req, res, next) {
-  try {
-    res.json(await programmingLanguages.update(req.params.id, req.body));
-  } catch (err) {
-    console.error(`Error while updating programming language`, err.message);
-    next(err);
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ************************************
-    //  Delete user
-app.delete('/user', function (req, res) {
-    let user_id = req.body.item_number;
-    if (!user_id) {
-    return res.status(400).send({ err: true, message: 'Please provide item_number' });
-    }
-    dbConn.query('DELETE FROM Orders WHERE id = ?', [user_id], function (err, results) {
-    if (err) console.log(err);
-    return res.send({ err: false, data: results, message: 'User has been updated successfully.' });
-    });
-});  */
