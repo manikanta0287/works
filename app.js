@@ -146,8 +146,9 @@ app.put('/insert', function (req, res) {
 
 //-----------------------delete by NAME
 
-app.delete('/delete', function (req, res) {
-    con.query('delete from detail where name = ? ', [req.params.id], function (err, ddd) {
+app.delete('/delete/:name', function (req, res) {
+    var name =  req.params.name
+    con.query('delete from detail where name = ? ', [name], function (err) {
         if (!err)
             res.send('Deleted successfully');
         else
