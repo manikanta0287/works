@@ -94,22 +94,9 @@ app.post("/data", function (req, res) {
     });
 });
 
-/* //  Update user with id
-app.put('/user', function (req, res) {
-    let id = req.body.item_number;
-    let item = req.body.item_name;
-    if (!user_id || !user) {
-        return res.status(400).send({ err: item, message: 'Please provide item and item_number' });
-    }
-    dbConn.query("UPDATE Orders SET item = ? WHERE item_number = ?", [item, id], function (err, results) {
-        if (err) console.log(err);
-        return res.send({ err: false, data: results, message: 'item has been updated successfully.' });
-    });
-});
- */
-//---------------------------------------------------
+//---------------------------------------------------PUT  by id---------------------
 
-app.put('/update', function (req, res) {
+/* app.put('/update/:name', function (req, res) {
     let id = req.body.id;
     let name = req.body.name;
     let email = req.body.email;
@@ -125,24 +112,29 @@ app.put('/update', function (req, res) {
         }
         return res.send({ err: false, data: ud, message: 'detail has been updated successfully' });
     })
-});
+}); */
 
-app.put('/insert', function (req, res) {
-    let bb = req.body;
+app.put('/update/:id', function (req, res) {
+    
+    let data = [req.body.name, req.body.email, req.body.phone, req.params.id];
 
-    var sql = 'set @name =?; \ call detail(@name);';
+    console.log('<<<<<<<<>>>>>>>>>', data);
 
-    con.query(sql, [bb.name, bb.email, bb.phone], function (err, dd) {
-        if (!err) {
+    // var details = req.body
+
+
+    // console.log('***********', details);
+
+    con.query('update detail set name = ?, email = ? , phone = ? where id = ?', data, function(err){
+        if (err){
+            console.log(err);              //'+details.name+'             +details.email             +details.phone
+        } else {
             res.send('Updated successfully');
-            console.log(dd);
         }
-        else {
-            console.log(err);
-        }
+        console.log('Updated successfully');
     })
 
-})
+});
 
 //-----------------------delete by NAME
 
