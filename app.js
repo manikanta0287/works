@@ -78,6 +78,7 @@ app.post("/data", function (req, res) {
 
     //   console.log(res.json())
     var paramas = req.body;
+    console.log(paramas);
 
     con.query("INSERT INTO detail SET ?", paramas, function (err, results) {
         if (err) {
