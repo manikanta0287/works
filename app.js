@@ -1,7 +1,6 @@
 var mysql = require('mysql2');
 const express = require("express");
 const app = express();
-const https = require('https')
 
 const bodyParser = require("body-parser");
 const { CONNREFUSED } = require('dns');
@@ -78,7 +77,7 @@ app.post("/data", function (req, res) {
 
     //   console.log(res.json())
     var paramas = req.body;
-    console.log(paramas);
+    console.log(paramas)
 
     con.query("INSERT INTO detail SET ?", paramas, function (err, results) {
         if (err) {
