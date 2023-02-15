@@ -56,7 +56,7 @@ app.get("/get/name/:name", function (req, res) {
 
 //-get by id
 
-app.get("/get/id/:id", function (req, res) {
+app.get("/get/:id", function (req, res) {
     var id = req.params.id;
 
     con.query("select * from detail where id = ?", [id], function (err, d) {
